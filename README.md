@@ -42,7 +42,7 @@ by verifying users and managing assignments.
 ### 1. Installation & Setup
 - Clone the Repository
 ```sh
-git clone https://github.com/chrisklmt/DS-Project2024.git
+git clone https://github.com/chrisklmt/DS-Project.git
 cd /to/project/folder
 ```
 
