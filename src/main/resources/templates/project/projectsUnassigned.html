@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Unassigned Projects</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(projectsUnassigned)}">
+        <h3>All Unassigned Projects</h3>
+        <a href="/project/unassignedANDoutdated" class="btn btn-primary">Unassigned and Outdated Projects</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Payment Amount</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projectsUnassigned}">
+                <td th:text="${project.title}"></td>
+                <td th:text="${project.description}"></td>
+                <td th:text="${project.paymentAmount}"></td>
+                <td th:text="${project.projectStatus}"></td>
+                <td th:text="${project.deadline}"></td>
+                <td>
+                    <form th:action="@{'/client/projectRequests/'+${project.id}}" method="post">
+                        <button type="submit" class="btn btn-outline-primary">Freelancer's requests</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(projectsUnassigned)}">
+        <h3>No Unassigned Accepted Projects found!</h3>
+    </div>
+</div>
+</body>
+</html>

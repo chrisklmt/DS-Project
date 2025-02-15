@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<header class="masthead mb-auto" th:fragment="header">
+    <div class="inner">
+        <h3 class="masthead-brand">CollabWorks</h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="/" data-path="/" >Home</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/project" data-path="/project">Projects</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/client" data-path="/client">Clients</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/freelancer" data-path="/freelancer">Freelancers</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/request" >Requests</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/assignment" >Assignments</a>
+            <a sec:authorize="hasRole('ROLE_CLIENT')" class="nav-link" href="/project/new">New Project</a>
+            <a sec:authorize="hasRole('ROLE_CLIENT')" class="nav-link" href="/client/my-projects">My Projects</a>
+            <a sec:authorize="hasRole('ROLE_CLIENT')" class="nav-link" href="/client/my-profile">My Profile</a>
+            <a sec:authorize="hasRole('ROLE_FREELANCER')" class="nav-link" href="/freelancer/projects">Projects</a>
+            <a sec:authorize="hasRole('ROLE_FREELANCER')" class="nav-link" href="/freelancer/requests" >My Requests</a>
+            <a sec:authorize="hasRole('ROLE_FREELANCER')" class="nav-link" href="/freelancer/my-profile">My Profile</a>
+
+            <a sec:authorize="!isAuthenticated()"  class="nav-link">
+                <a  class="nav-link" href="/login">Login</a>
+                <a  class="nav-link" href="/auth/registerClient">Register as Client</a>
+                <a  class="nav-link" href="/auth/registerFreelancer">Register as Freelancer</a>
+            </a>
+            <a sec:authorize="isAuthenticated()"  class="nav-link">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit"  class="btn btn-primary" value="Sign Out"/>
+                </form>
+            </a>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Freelancer's Requests</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(requestsForProject)}">
+        <h3>Freelancer's Requests for <span th:text="${currentProject.title}"></span></h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Phone</th>
+                <th>Skills</th>
+                <th>Date submitted</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requestsForProject}">
+                <td th:text="${request.freelancer.firstName}"></td>
+                <td th:text="${request.freelancer.lastName}"></td>
+                <td th:text="${request.freelancer.phone}"></td>
+                <td th:text="${request.freelancer.skills}"></td>
+                <td th:text="${request.dateSubmitted}"></td>
+                <td>
+                    <form th:action="@{'/assignment/assignFreelancer/'+${request.id}}" method="post">
+                        <button type="submit" class="btn btn-outline-success">Accept Freelancer</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(requestsForProject)}">
+        <h3>No Requests found for <span th:text="${currentProject.title}"></span></h3>
+    </div>
+</div>
+</body>
+</html>

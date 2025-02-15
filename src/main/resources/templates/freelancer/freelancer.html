@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Freelancer</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+<form action="#" th:action="@{/freelancer/new}" th:object="${freelancer}"
+      method="post">
+
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" class="form-control" th:field="*{firstName}">
+    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" class="form-control" th:field="*{lastName}">
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="error"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" class="form-control" th:field="*{phone}">
+    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:errorclass="error"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="skills">Skills</label>
+    <input type="text" id="skills" class="form-control" th:field="*{skills}">
+    <span th:if="${#fields.hasErrors('skills')}" th:errors="*{skills}" th:errorclass="error"></span>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</body>
+</html>

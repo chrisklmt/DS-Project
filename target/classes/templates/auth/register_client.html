@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up as Client</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <h3>Client Registration</h3>
+    <form th:action="@{/auth/saveUserClient}" method="post" th:object="${user}">
+        <div class="form-group row">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" th:field="*{username}" id="username"/>
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></span>
+        </div>
+        <div class="form-group row">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" th:field="*{email}" id="email"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></span>
+        </div>
+        <div class="form-group row">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}"/>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></span>
+        </div>
+        <div th:object="${client}">
+            <div class="form-group row">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" th:field="*{firstName}" id="firstName"/>
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"></span>
+            </div>
+            <div class="form-group row">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" th:field="*{lastName}" id="lastName"/>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="error"></span>
+            </div>
+            <div class="form-group row">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" th:field="*{phone}" id="phone"/>
+                <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:errorclass="error"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign up as Client</button>
+    </form>
+    <div th:text="${msg}"></div>
+</div>
+</body>
+</html>

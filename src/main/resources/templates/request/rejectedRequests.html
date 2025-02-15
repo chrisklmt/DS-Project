@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rejected Requests</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(rejectedRequests)}">
+        <h3>All Rejected Requests</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Status</th>
+                <th>Project Title</th>
+                <th>Description</th>
+                <th>Date Submitted</th>
+                <th>Freelancer Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${rejectedRequests}">
+                <td th:text="${request.requestStatus}"></td>
+                <td th:text="${request.project.title}"></td>
+                <td th:text="${request.project.description}"></td>
+                <td th:text="${request.dateSubmitted}"></td>
+                <td th:text="${request.freelancer.user.username}"></td>
+                <td>
+                    <form th:action="@{'/request/rejectedRequests/'+${request.id}}" method="post">
+                        <button type="submit" class="btn btn-danger">Delete request</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(rejectedRequests)}">
+        <h3>No Rejected Requests found!</h3>
+    </div>
+</div>
+</body>
+</html>

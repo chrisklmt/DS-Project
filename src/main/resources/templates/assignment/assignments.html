@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignments</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(assignments)}">
+        <h3>All Assignments</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Freelancer</th>
+                <th>Project Title</th>
+                <th>Client</th>
+                <th>Date submitted</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="assignment : ${assignments}">
+                <td th:text="${assignment.freelancer.firstName} +' '+ ${assignment.freelancer.lastName}"></td>
+                <td th:text="${assignment.project.title}"></td>
+                <td th:text="${assignment.project.client.firstName} +' '+ ${assignment.project.client.lastName}"></td>
+                <td th:text="${assignment.dateSubmitted}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(assignments)}">
+       <h3>No Assignments found!</h3>
+    </div>
+</div>
+</body>
+</html>

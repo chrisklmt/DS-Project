@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(notRequestedProjects)}">
+        <h3>All Projects</h3>
+        <p th:if="${!freelancerVerified}">You need to be verified by admin to make Requests</p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Payment Amount</th>
+                <th>Status</th>
+                <th>Deadline</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${notRequestedProjects}">
+                <td th:text="${project.title}"></td>
+                <td th:text="${project.description}"></td>
+                <td th:text="${project.paymentAmount}"></td>
+                <td th:text="${project.projectStatus}"></td>
+                <td th:text="${project.deadline}"></td>
+                <td th:if="${freelancerVerified}">
+                    <form th:action="@{'/project/assignRequest/' + ${project.id}}" method="post">
+                        <button type="submit" class="btn btn-outline-success">Make request</button>
+                    </form>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(notRequestedProjects)}">
+        <h3>No Projects found!</h3>
+    </div>
+</div>
+</body>
+</html>

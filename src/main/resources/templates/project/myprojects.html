@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(projects)}">
+        <h3>My Projects</h3>
+        <a href="/project/projectsUnassigned" class="btn btn-primary">Check Unassigned Projects</a>
+        <a href="/project/projectsΑssigned" class="btn btn-primary">Check Assigned Projects</a>
+        <a href="/project/completedProjects" class="btn btn-primary">Check Completed Projects</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Payment Amount</th>
+                <th>Status</th>
+                <th>Deadline</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projects}">
+                <td th:text="${project.title}"></td>
+                <td th:text="${project.description}"></td>
+                <td th:text="${project.paymentAmount}"></td>
+                <td th:text="${project.projectStatus}"></td>
+                <td th:text="${project.deadline}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(projects)}">
+        <h3>You don't have any projects yet!</h3>
+    </div>
+</div>
+</body>
+</html>

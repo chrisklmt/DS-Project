@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My profile</title>
+</head>
+<body>
+
+<div layout:fragment="main-content">
+    <h3>Profile Details</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Skills</th>
+            <th>Verified</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${freelancer.firstName}"></td>
+            <td th:text="${freelancer.lastName}"></td>
+            <td th:text="${freelancer.phone}"></td>
+            <td th:text="${freelancer.skills}"></td>
+            <td th:text="${freelancer.verified}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/freelancer/edit-profile}" method="get">
+        <button type="submit" class="btn btn-primary">Edit Profile</button>
+    </form>
+    </div>
+</body>
+</html>

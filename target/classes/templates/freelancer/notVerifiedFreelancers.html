@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Freelancer</title>
+</head>
+<body>
+
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(freelancers)}">
+        <h3>Not Verified Freelancers</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Skills</th>
+                <th>Verified</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="freelancer : ${freelancers}">
+                <td th:text="${freelancer.firstName}"></td>
+                <td th:text="${freelancer.lastName}"></td>
+                <td th:text="${freelancer.phone}"></td>
+                <td th:text="${freelancer.skills}"></td>
+                <td th:text="${freelancer.verified}"></td>
+                <td>
+                    <form th:action="@{/freelancer/verify/{freelancer_id}(freelancer_id=${freelancer.id})}" method="post">
+                        <button type="submit" class="btn btn-success">Verify</button>
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(freelancers)}">
+        <h3>No Unverified Freelancers found!</h3>
+    </div>
+</div>
+</body>
+</html>
