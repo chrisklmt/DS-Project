@@ -81,9 +81,11 @@ public class AssignmentController {
             }
             requestService.saveRequest(req); // Save the updated request status
         }
-
-        Client currentClient = clientService.getCurrentClient();
-        model.addAttribute("assignedProjects", projectService.getAssignedProjects(currentClient));
-        return "project/projectsΑssigned";
+//
+//        Client currentClient = clientService.getCurrentClient();
+//        model.addAttribute("assignedProjects", projectService.getAssignedProjects(currentClient));
+        System.out.println("++++++++++++++++++++++++++++++++");
+        //return "redirect:/client/my-projects";
+               return "redirect:/project/projectsAssigned";
     }
 }

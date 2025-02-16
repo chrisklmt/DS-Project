@@ -1,7 +1,9 @@
 package gr.hua.dit.ds.dsproject.services;
 
+import gr.hua.dit.ds.dsproject.entities.Assignment;
 import gr.hua.dit.ds.dsproject.entities.Freelancer;
 import gr.hua.dit.ds.dsproject.entities.User;
+import gr.hua.dit.ds.dsproject.repositories.AssignmentRepository;
 import gr.hua.dit.ds.dsproject.repositories.FreelancerRepository;
 import gr.hua.dit.ds.dsproject.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -16,10 +18,14 @@ public class FreelancerService {
 
     private final FreelancerRepository freelancerRepository;
     private final UserRepository userRepository;
+    private final AssignmentRepository assignmentRepository;
+    private final AssignmentService assignmentService;
 
-    public FreelancerService(FreelancerRepository freelancerRepository, UserRepository userRepository) {
+    public FreelancerService(FreelancerRepository freelancerRepository, UserRepository userRepository, AssignmentRepository assignmentRepository, AssignmentService assignmentService) {
         this.freelancerRepository = freelancerRepository;
         this.userRepository = userRepository;
+        this.assignmentRepository = assignmentRepository;
+        this.assignmentService = assignmentService;
     }
 
     @Transactional
@@ -79,11 +85,14 @@ public class FreelancerService {
     }
     @Transactional
     public void deleteFreelancer(Integer freelancerId) {
-        List<Freelancer> freelancers = freelancerRepository.findAll();
-        for (Freelancer f : freelancers) {
-            if(f.getId().equals(freelancerId)) {
-                freelancerRepository.delete(f);
+        Freelancer freelancer = freelancerRepository.findById(freelancerId).orElse(null);
+
+        if (freelancer != null) {
+            List<Assignment> assignments = freelancer.getAssignments();
+            if (!assignments.isEmpty()) {
+                assignmentService.deleteAssignments(assignments);
             }
+            freelancerRepository.delete(freelancer);
         }
     }
 

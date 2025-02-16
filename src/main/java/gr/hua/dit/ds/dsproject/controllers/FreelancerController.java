@@ -46,7 +46,7 @@ public class FreelancerController {
 
     @PostMapping("/delete/{freelancer_id}")
     public String deleteFreelancer(@PathVariable int freelancer_id,Model model){
-        Freelancer freelancer = freelancerService.getFreelancer(freelancer_id);
+
         freelancerService.deleteFreelancer(freelancer_id);
         model.addAttribute("freelancers", freelancerService.getFreelancers());
         return "freelancer/freelancers";

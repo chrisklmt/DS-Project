@@ -11,13 +11,13 @@
 </head>
 <body>
 <div layout:fragment="main-content">
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/project/projectsPending" class="btn btn-primary">Show Pending Projects</a>
+        <a href="/project/projectsRejected" class="btn btn-primary">Show Rejected Projects</a>
+        <a href="/project/projectOutdated" class="btn btn-primary">Show Outdated Projects</a>
+    </div>
     <div th:if="${ not#lists.isEmpty(acceptedProjects)}">
         <h3>All Projects</h3>
-        <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a href="/project/projectsPending" class="btn btn-primary">Show Pending Projects</a>
-            <a href="/project/projectsRejected" class="btn btn-primary">Show Rejected Projects</a>
-            <a href="/project/projectOutdated" class="btn btn-primary">Show Outdated Projects</a>
-        </div>
 
         <table class="table">
             <thead>

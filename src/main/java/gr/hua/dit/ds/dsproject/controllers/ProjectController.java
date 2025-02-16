@@ -138,11 +138,11 @@ public class  ProjectController {
         return "project/projectsUnassigned";
     }
 
-    @GetMapping("/projectsΑssigned")
+    @GetMapping("/projectsAssigned")
     public String showAssignedProjects(Model model) {
         Client currentClient = clientService.getCurrentClient();
         model.addAttribute("assignedProjects", projectService.getAssignedProjects(currentClient));
-        return "project/projectsΑssigned";
+        return "project/projectsAssigned";
     }
 
     @GetMapping("")

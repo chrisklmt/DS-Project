@@ -11,7 +11,7 @@
 <body>
 <div layout:fragment="main-content">
     <div th:if="${ not#lists.isEmpty(assignedProjects)}">
-        <h3>All Αssigned Projects</h3>
+        <h3>All Assigned Projects</h3>
         <table class="table">
             <thead>
             <tr>
@@ -32,7 +32,7 @@
         </table>
     </div>
     <div th:if="${ #lists.isEmpty(assignedProjects)}">
-        <h3>No Αssigned Projects found!</h3>
+        <h3>No Assigned Projects found!</h3>
     </div>
 </div>
 </body>

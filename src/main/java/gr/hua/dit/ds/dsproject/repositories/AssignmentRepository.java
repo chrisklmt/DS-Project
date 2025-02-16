@@ -10,4 +10,6 @@ import java.util.List;
 public interface AssignmentRepository extends JpaRepository<Assignment, Integer> {
     List<Assignment> findByProjectId(Integer projectId);
 
+    List<Assignment> findByFreelancerId(Integer freelancerId);
+
 }

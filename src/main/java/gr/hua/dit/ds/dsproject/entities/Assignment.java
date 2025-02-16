@@ -24,7 +24,7 @@ public class Assignment {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    @JoinColumn(name = "project_id")
     private Project project;
 
     public Assignment() {}
