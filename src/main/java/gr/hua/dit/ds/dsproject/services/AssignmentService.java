@@ -46,6 +46,10 @@ public class AssignmentService {
 
     @Transactional
     public void deleteAssignments(List<Assignment> assignments) {
-        assignmentRepository.deleteAll(assignments);
+        for (Assignment assignment : assignments) {
+            assignmentRepository.deleteById(assignment.getId()); // Force individual deletion
+            System.out.println("Deleted assignment with ID: " + assignment.getId());
         }
+    }
+
 }

@@ -83,16 +83,19 @@ public class FreelancerService {
         Freelancer freelancer = getFreelancer(freelancerId);
         freelancer.setVerified(true);
     }
+
     @Transactional
     public void deleteFreelancer(Integer freelancerId) {
         Freelancer freelancer = freelancerRepository.findById(freelancerId).orElse(null);
-
         if (freelancer != null) {
             List<Assignment> assignments = freelancer.getAssignments();
+
             if (!assignments.isEmpty()) {
+                System.out.println("Freelancer has assignments: " + assignments.size());
                 assignmentService.deleteAssignments(assignments);
-            }
+                }
             freelancerRepository.delete(freelancer);
+            System.out.println("Freelancer deleted successfully.");
         }
     }
 
