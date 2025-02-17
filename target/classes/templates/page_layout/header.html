@@ -8,36 +8,71 @@
     <title>Title</title>
 </head>
 <body>
-
 <header class="masthead mb-auto" th:fragment="header">
-    <div class="inner">
-        <h3 class="masthead-brand">CollabWorks</h3>
-        <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link" href="/" data-path="/" >Home</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/project" data-path="/project">Projects</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/client" data-path="/client">Clients</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/freelancer" data-path="/freelancer">Freelancers</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/request" >Requests</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/assignment" >Assignments</a>
-            <a sec:authorize="hasRole('ROLE_CLIENT')" class="nav-link" href="/project/new">New Project</a>
-            <a sec:authorize="hasRole('ROLE_CLIENT')" class="nav-link" href="/client/my-projects">My Projects</a>
-            <a sec:authorize="hasRole('ROLE_CLIENT')" class="nav-link" href="/client/my-profile">My Profile</a>
-            <a sec:authorize="hasRole('ROLE_FREELANCER')" class="nav-link" href="/freelancer/projects">Projects</a>
-            <a sec:authorize="hasRole('ROLE_FREELANCER')" class="nav-link" href="/freelancer/requests" >My Requests</a>
-            <a sec:authorize="hasRole('ROLE_FREELANCER')" class="nav-link" href="/freelancer/my-profile">My Profile</a>
-
-            <a sec:authorize="!isAuthenticated()"  class="nav-link">
-                <a  class="nav-link" href="/login">Login</a>
-                <a  class="nav-link" href="/auth/registerClient">Register as Client</a>
-                <a  class="nav-link" href="/auth/registerFreelancer">Register as Freelancer</a>
-            </a>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <h3 class="navbar-brand" style="solid-color: white">CollabWorks</h3>
+<!--        <a class="navbar-brand" href="#">CollabWorks</a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <a class="nav-link" href="/" data-path="/">Home</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="/project" data-path="/project">Projects</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="/client" data-path="/client">Clients</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="/freelancer" data-path="/freelancer">Freelancers</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="/request">Requests</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="/assignment">Assignments</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_CLIENT')">
+                    <a class="nav-link" href="/project/new">New Project</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_CLIENT')">
+                    <a class="nav-link" href="/client/my-projects">My Projects</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_CLIENT')">
+                    <a class="nav-link" href="/client/my-profile">My Profile</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_FREELANCER')">
+                    <a class="nav-link" href="/freelancer/projects">Projects</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_FREELANCER')">
+                    <a class="nav-link" href="/freelancer/requests">My Requests</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_FREELANCER')">
+                    <a class="nav-link" href="/freelancer/my-profile">My Profile</a>
+                </li>
+                    <!-- Links for unauthenticated users -->
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/auth/registerClient">Register as Client</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/auth/registerFreelancer">Register as Freelancer</a>
+                </li>
+            </ul>
             <a sec:authorize="isAuthenticated()"  class="nav-link">
                 <form th:action="@{/logout}" method="post">
-                    <input type="submit"  class="btn btn-primary" value="Sign Out"/>
+                    <input type="submit"  class="btn btn-outline-success my-2 my-sm-0" value="Sign Out"/>
                 </form>
             </a>
-        </nav>
-    </div>
+        </div>
+    </nav>
+    <br><br><br>
 </header>
 </body>
 </html>

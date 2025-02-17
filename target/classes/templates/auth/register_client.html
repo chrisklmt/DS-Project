@@ -3,15 +3,36 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{page_layout/layout}">
-
 <head>
     <meta charset="UTF-8">
     <title>Sign Up as Client</title>
+    <style>
+        /* Center the form container */
+        .inputs {
+            max-width: 400px;
+            margin: 0 auto; /* centers the container horizontally */
+            text-align: center; /* centers inline content */
+        }
+        /* Make labels block-level and centered */
+        .inputs .form-group label {
+            display: block;
+            text-align: center;
+        }
+        /* Center input fields */
+        .inputs .form-group input {
+            display: block;
+            margin: 0 auto;
+        }
+        /* If using rows (Bootstrap's grid) and you want to override their default alignment */
+        .form-group.row {
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="main-content">
     <h3>Client Registration</h3>
-    <form th:action="@{/auth/saveUserClient}" method="post" th:object="${user}">
+    <form th:action="@{/auth/saveUserClient}" method="post" class="inputs" th:object="${user}">
         <div class="form-group row">
             <label for="username">Username</label>
             <input type="text" class="form-control" th:field="*{username}" id="username"/>
