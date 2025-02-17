@@ -7,10 +7,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit my profile</title>
+  <style>
+    /* Center the form container */
+    .inputs {
+      max-width: 400px;
+      margin: 0 auto; /* centers the container horizontally */
+      text-align: center; /* centers inline content */
+    }
+    /* Make labels block-level and centered */
+    .inputs .form-group label {
+      display: block;
+      text-align: center;
+    }
+    /* Center input fields */
+    .inputs .form-group input,
+    .inputs .form-group textarea {
+      display: block;
+      margin: 0 auto;
+    }
+    /* If using rows (Bootstrap's grid) and you want to override their default alignment */
+    .form-group.row {
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
 <div layout:fragment="main-content">
-  <form th:action="@{/freelancer/edit-profile}" method="post" th:object="${freelancer}">
+  <form th:action="@{/freelancer/edit-profile}" method="post" th:object="${freelancer}" class="inputs">
     <input type="hidden" th:field="*{id}"/>  <!-- Primary key -->
     <input type="hidden" th:field="*{user.id}"/>  <!-- Foreign key for user ID -->
 

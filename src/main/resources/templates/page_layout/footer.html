@@ -7,16 +7,15 @@
     <title>Title</title>
 </head>
 <body>
-
-<footer class="mastfoot mt-auto" th:fragment="header">
-    <div sec:authorize="isAuthenticated()">
-        Authenticated username:
-        <span sec:authentication="name"></span>
-        Authenticated user roles:
-        <span sec:authentication="principal.authorities"></span>
-    </div>
-    <div class="inner">
-        <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+<footer class="footer" th:fragment="footer">
+<!--    <div class="text-muted" sec:authorize="isAuthenticated()">-->
+<!--        Authenticated username:-->
+<!--        <span sec:authentication="name"></span>-->
+<!--        Authenticated user roles:-->
+<!--        <span sec:authentication="principal.authorities"></span>-->
+<!--    </div>-->
+    <div class="text-muted">
+        <p>Sticky footer template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/fat">@fat</a>.</p>
     </div>
 </footer>
 </body>
