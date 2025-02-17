@@ -38,11 +38,12 @@ public class Freelancer {
     @NotNull(message = "Freelancer's verification can't be null")
     @Column
     private Boolean verified;
-
-    @OneToMany(mappedBy = "freelancer", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "freelancer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Assignment> assignments;
 
-    @OneToMany(mappedBy = "freelancer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests;
 
     @OneToOne(cascade = CascadeType.ALL)

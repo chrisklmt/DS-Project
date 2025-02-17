@@ -1,6 +1,7 @@
 package gr.hua.dit.ds.dsproject.services;
 
 
+import gr.hua.dit.ds.dsproject.entities.Assignment;
 import gr.hua.dit.ds.dsproject.entities.Project;
 import gr.hua.dit.ds.dsproject.entities.Request;
 import gr.hua.dit.ds.dsproject.entities.Status;
@@ -51,6 +52,7 @@ public class RequestService {
     public void deleteRequest(Integer requestId) {
         requestRepository.deleteById(requestId);
     }
+
     @Transactional
     public List<Request> getRequestsByProjectID(Integer projectId) {
         Project project = projectService.getProject(projectId);
@@ -64,4 +66,11 @@ public class RequestService {
         return requestsForProject;
     }
 
+    @Transactional
+    public void deleteRequests(List<Request> requests) {
+        for (Request request : requests) {
+            requestRepository.deleteById(request.getId()); // Force individual deletion
+            System.out.println("Deleted request with ID: " + request.getId());
+        }
+    }
 }

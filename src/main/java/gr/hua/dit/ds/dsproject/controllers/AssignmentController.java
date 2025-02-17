@@ -55,18 +55,55 @@ public class AssignmentController {
 //            return "assignment/assignments";
 //        }
 //    }
+//    @PostMapping("/assignFreelancer/{requestId}")
+//    public String assignFreelancerToProject(@PathVariable int requestId, Model model) {
+//        Request request = requestService.getRequest(requestId);
+//
+//        Freelancer freelancer = freelancerService.getFreelancer(request.getFreelancer().getId());
+//        Project project = projectService.getProject(request.getProject().getId());
+//
+//        Assignment assignment = new Assignment();
+//        assignment.setFreelancer(freelancer);
+//        assignment.setProject(project);
+//        assignment.setDateSubmitted(request.getDateSubmitted());
+//        assignmentService.saveAssignment(assignment);
+//
+//        List<Request> allRequestsForProject = project.getRequests();
+//        List<Request> requestsToUpdate = new ArrayList<>(allRequestsForProject); // Create a copy of the list
+//
+//        for (Request req : requestsToUpdate) {
+//            if (req.getId().equals(requestId)) {
+//                // Mark the selected request as "Accepted"
+//                req.setRequestStatus(Status.Accepted); // Assuming Status.Accepted is defined
+//            } else {
+//                // Mark other requests as "Rejected"
+//                req.setRequestStatus(Status.Rejected); // Assuming Status.Rejected is defined
+//            }
+//            requestService.saveRequest(req); // Save the updated request status
+//        }
+////
+////        Client currentClient = clientService.getCurrentClient();
+////        model.addAttribute("assignedProjects", projectService.getAssignedProjects(currentClient));
+//        System.out.println("++++++++++++++++++++++++++++++++");
+//        //return "redirect:/client/my-projects";
+//               return "redirect:/project/projectsAssigned";
+//    }
     @PostMapping("/assignFreelancer/{requestId}")
-    public String assignFreelancerToProject(@PathVariable int requestId, Model model) {
+    public String assignFreelancerToProject(@PathVariable int requestId) {
         Request request = requestService.getRequest(requestId);
-
         Freelancer freelancer = freelancerService.getFreelancer(request.getFreelancer().getId());
         Project project = projectService.getProject(request.getProject().getId());
 
         Assignment assignment = new Assignment();
+
+        List<Assignment> freelancer_assignments = freelancer.getAssignments();
+        freelancer_assignments.add(assignment);
+        freelancer.setAssignments(freelancer_assignments);
         assignment.setFreelancer(freelancer);
+
+        project.setAssignment(assignment);
         assignment.setProject(project);
-        assignment.setDateSubmitted(request.getDateSubmitted());
-        assignmentService.saveAssignment(assignment);
+        //assignmentService.saveAssignment(assignment);
 
         List<Request> allRequestsForProject = project.getRequests();
         List<Request> requestsToUpdate = new ArrayList<>(allRequestsForProject); // Create a copy of the list
@@ -81,11 +118,6 @@ public class AssignmentController {
             }
             requestService.saveRequest(req); // Save the updated request status
         }
-//
-//        Client currentClient = clientService.getCurrentClient();
-//        model.addAttribute("assignedProjects", projectService.getAssignedProjects(currentClient));
-        System.out.println("++++++++++++++++++++++++++++++++");
-        //return "redirect:/client/my-projects";
-               return "redirect:/project/projectsAssigned";
+        return "redirect:/project/projectsAssigned";
     }
 }

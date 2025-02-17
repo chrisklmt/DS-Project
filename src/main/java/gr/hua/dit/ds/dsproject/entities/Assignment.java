@@ -27,7 +27,7 @@ public class Assignment {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    public Assignment() {}
+    public Assignment() {this.dateSubmitted = LocalDate.now();}
 
     public Assignment(LocalDate dateSubmitted) {
         this.dateSubmitted = dateSubmitted;

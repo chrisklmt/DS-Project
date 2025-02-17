@@ -7,6 +7,7 @@ import gr.hua.dit.ds.dsproject.repositories.FreelancerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,17 +21,30 @@ public class AssignmentService {
         this.freelancerRepository = freelancerRepository;
     }
 
+//    @Transactional
+//    public List<Assignment> getAssignments(){
+//        return assignmentRepository.findAll();
+//    }
+
     @Transactional
     public List<Assignment> getAssignments(){
-        return assignmentRepository.findAll();
+        List<Assignment> assignments = assignmentRepository.findAll();
+        List<Assignment> retAssignments = new ArrayList<>();
+
+        for(Assignment assignment : assignments){
+            if (assignment.getFreelancer() != null){
+                retAssignments.add(assignment);
+            }
+        }
+        return retAssignments;
     }
 
     @Transactional
     public void saveAssignment(Assignment assignment) {
         // Check if the project already has an assignment
-        if (assignment.getProject() != null && assignment.getProject().getAssignment() != null) {
-            throw new IllegalStateException("This project is already assigned to another freelancer.");
-        }
+//        if (assignment.getProject() != null && assignment.getProject().getAssignment() != null) {
+//            throw new IllegalStateException("This project is already assigned to another freelancer.");
+//        }
         assignmentRepository.save(assignment);
     }
 

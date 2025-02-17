@@ -5,6 +5,7 @@ import gr.hua.dit.ds.dsproject.entities.Project;
 import gr.hua.dit.ds.dsproject.services.FreelancerService;
 import gr.hua.dit.ds.dsproject.services.ProjectService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ public class FreelancerController {
         this.projectService = projectService;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showFreelancers(Model model){
         model.addAttribute("freelancers", freelancerService.getFreelancers());
@@ -46,9 +48,10 @@ public class FreelancerController {
 
     @PostMapping("/delete/{freelancer_id}")
     public String deleteFreelancer(@PathVariable int freelancer_id,Model model){
-
+        System.out.println("freelancer_id: "+freelancer_id);
         freelancerService.deleteFreelancer(freelancer_id);
         model.addAttribute("freelancers", freelancerService.getFreelancers());
+        System.out.println("freelancers: "+freelancerService.getFreelancers());
         return "freelancer/freelancers";
     }
 
