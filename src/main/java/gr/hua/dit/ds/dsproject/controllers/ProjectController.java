@@ -10,6 +10,7 @@ import gr.hua.dit.ds.dsproject.services.FreelancerService;
 import gr.hua.dit.ds.dsproject.services.ProjectService;
 import gr.hua.dit.ds.dsproject.entities.Project;
 import jakarta.validation.Valid;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,7 @@ public class  ProjectController {
         this.freelancerService = freelancerService;
         this.projectRepository = projectRepository;
     }
-
+    @Secured("ROLE_CLIENT")
     @GetMapping("/new")
     public String addProject(Model model){
         Project project = new Project();
@@ -44,7 +45,7 @@ public class  ProjectController {
         model.addAttribute("msg","");
         return "project/project";
     }
-
+    @Secured("ROLE_CLIENT")
     @PostMapping("/new")
     public String saveProject(@Valid @ModelAttribute("project") Project project, BindingResult theBindingResult, Model model ){
         if (theBindingResult.hasErrors()) {
@@ -87,12 +88,13 @@ public class  ProjectController {
         return "request/myrequests";
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/projectsPending")
     public String showPendingProjects(Model model) {
         model.addAttribute("projects", projectService.getProjectsPending());
         return "project/projectsPending";
     }
-
+    @Secured("ROLE_ADMIN")
     @PostMapping("accept-project/{projectId}")
     public String acceptProject(@PathVariable int projectId,Model model) {
         Project project = projectService.getProject(projectId);
@@ -101,7 +103,7 @@ public class  ProjectController {
         model.addAttribute("projects", projectService.getProjectsPending());
         return "project/projectsPending";
     }
-
+    @Secured("ROLE_ADMIN")
     @PostMapping("reject-project/{projectId}")
     public String rejectProject(@PathVariable int projectId,Model model) {
         Project project = projectService.getProject(projectId);
@@ -110,19 +112,20 @@ public class  ProjectController {
         model.addAttribute("projects", projectService.getProjectsPending());
         return "project/projectsPending";
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/projectsRejected")
     public String showRejectedProjects(Model model) {
         model.addAttribute("projects", projectService.getRejectedProjects());
         return "project/projectsRejected";
     }
+    @Secured("ROLE_ADMIN")
     @PostMapping("deleteProject/{projectId}")
     public String deleteProjectRejected(@PathVariable int projectId, Model model) {
         projectService.deleteProject(projectId);
         model.addAttribute("projects", projectService.getRejectedProjects());
         return "project/projectsRejected";
     }
-
+    @Secured("ROLE_ADMIN")
     @PostMapping("deleteProjectOutdated/{projectId}")
     public String deleteProjectOutdated(@PathVariable int projectId, Model model) {
         projectService.deleteProject(projectId);
@@ -131,39 +134,40 @@ public class  ProjectController {
         return "project/unassignedANDoutdated";
     }
 
+    @Secured("ROLE_CLIENT")
     @GetMapping("/projectsUnassigned")
     public String showUnassignedProjects(Model model) {
         Client currentClient = clientService.getCurrentClient();
         model.addAttribute("projectsUnassigned", projectService.getUnassignedProjects(currentClient));
         return "project/projectsUnassigned";
     }
-
+    @Secured("ROLE_CLIENT")
     @GetMapping("/projectsAssigned")
     public String showAssignedProjects(Model model) {
         Client currentClient = clientService.getCurrentClient();
         model.addAttribute("assignedProjects", projectService.getAssignedProjects(currentClient));
         return "project/projectsAssigned";
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showAcceptedProjects(Model model) {
         model.addAttribute("acceptedProjects", projectService.getAcceptedProjects());
         return "project/projects";
     }
-
+    @Secured({"ROLE_CLIENT", "ROLE_ADMIN"})
     @GetMapping("/unassignedANDoutdated")
     public String showUnassignedAndOutdatedProjects(Model model) {
         Client currentClient = clientService.getCurrentClient();
         model.addAttribute("projectsUnassignedAndOutdated", projectService.getUnassignedAndOutdatedProjects(currentClient));
         return "project/unassignedANDoutdated";
     }
-
+    @Secured("ROLE_CLIENT")
     @GetMapping("/projectOutdated")
     public String showProjectsOutdated(Model model) {
         model.addAttribute("projects", projectService.getAllOutdatedProjects());
         return "project/projectOutdated";
     }
-
+    @Secured("ROLE_CLIENT")
     @GetMapping("/completedProjects")
     public String showCompletedProjects(Model model) {
         Client currentClient = clientService.getCurrentClient();

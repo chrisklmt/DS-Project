@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.dsproject.controllers;
 
+import gr.hua.dit.ds.dsproject.entities.Assignment;
 import gr.hua.dit.ds.dsproject.entities.Freelancer;
 import gr.hua.dit.ds.dsproject.entities.Project;
 import gr.hua.dit.ds.dsproject.services.FreelancerService;
@@ -23,21 +24,18 @@ public class FreelancerController {
         this.freelancerService = freelancerService;
         this.projectService = projectService;
     }
-
     @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showFreelancers(Model model){
         model.addAttribute("freelancers", freelancerService.getFreelancers());
         return "freelancer/freelancers";
     }
-
     @Secured("ROLE_ADMIN")
     @GetMapping("/not-verified")
     public String showNotVerifiedFreelancers(Model model){
         model.addAttribute("freelancers", freelancerService.getNotVerifiedFreelancer());
         return "freelancer/notVerifiedFreelancers";
     }
-
     @Secured("ROLE_ADMIN")
     @PostMapping("/verify/{freelancer_id}")
     public String changeVerifiedStatus(@PathVariable int freelancer_id,Model model){
@@ -47,7 +45,6 @@ public class FreelancerController {
         model.addAttribute("freelancers", freelancerService.getNotVerifiedFreelancer());
         return "freelancer/notVerifiedFreelancers";
     }
-
     @Secured("ROLE_ADMIN")
     @PostMapping("/delete/{freelancer_id}")
     public String deleteFreelancer(@PathVariable int freelancer_id,Model model){
@@ -76,7 +73,6 @@ public class FreelancerController {
             return "freelancer/freelancers";
         }
     }
-
     @Secured("ROLE_FREELANCER")
     @GetMapping("/projects")
     public String showProjects(Model model) {
@@ -90,7 +86,6 @@ public class FreelancerController {
         model.addAttribute("freelancerVerified", freelancer.getVerified());
         return "project/projectsForFreelancer";
     }
-
     @Secured("ROLE_FREELANCER")
     @GetMapping("/requests")
     public String showRequests(Model model) {
@@ -100,19 +95,29 @@ public class FreelancerController {
         return "request/myrequests";
     }
 
+    @Secured("ROLE_FREELANCER")
+    @GetMapping("/my-assignments")
+    public String showMyAssignments(Model model) {
+        Freelancer freelancer = freelancerService.getCurrentFreelancer();
+        model.addAttribute("assignments", freelancer.getAssignments());
+        return "assignment/myassignments";
+    }
+
+    @Secured("ROLE_FREELANCER")
     @GetMapping("/my-profile")
     public String showProfile(Model model) {
         Freelancer freelancer = freelancerService.getFreelancer(freelancerService.getCurrentFreelancer().getId());
         model.addAttribute("freelancer", freelancer);
         return "freelancer/my-profile";
     }
-
+    @Secured("ROLE_FREELANCER")
     @GetMapping("/edit-profile")
     public String editProfile(Model model) {
         Freelancer freelancer = freelancerService.getFreelancer(freelancerService.getCurrentFreelancer().getId());
         model.addAttribute("freelancer", freelancer);
         return "freelancer/edit-profile";
     }
+    @Secured("ROLE_FREELANCER")
     @PostMapping("/edit-profile")
     public String updateProfile(@Valid @ModelAttribute("freelancer") Freelancer freelancer,
                               BindingResult theBindingResult) {

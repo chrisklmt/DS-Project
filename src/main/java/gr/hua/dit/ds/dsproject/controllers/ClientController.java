@@ -74,7 +74,6 @@ public class ClientController {
         model.addAttribute("requestsForProject", requestsForProject);
         return "request/requestsForProject";
     }
-
     @Secured("ROLE_CLIENT")
     @GetMapping("/my-profile")
     public String showProfile(Model model) {

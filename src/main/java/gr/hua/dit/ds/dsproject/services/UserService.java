@@ -95,4 +95,12 @@ public class UserService implements UserDetailsService {
     public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
     }
+
+    @Transactional
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Transactional
+    public Optional<User> findByEmail(String email){return userRepository.findByEmail(email);}
 }
