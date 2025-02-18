@@ -88,55 +88,6 @@ public class FreelancerService {
         freelancer.setVerified(true);
     }
 
-//    @Transactional
-//    public void deleteFreelancer(int freelancerId) {
-////        Freelancer freelancer = freelancerRepository.findById(freelancerId).orElse(null);
-//        Freelancer freelancer = getFreelancer(freelancerId);
-//        System.out.println("1freelancer: "+freelancer);
-////        if (freelancer != null) {
-////            List<Assignment> assignments = freelancer.getAssignments();
-////
-////
-////            if (!assignments.isEmpty()) {
-////                System.out.println("Freelancer has assignments: " + assignments.size());
-////                assignmentService.deleteAssignments(assignments);
-////                List<Request> requests = freelancer.getRequests();
-////                System.out.println("Freelancer has requests: " + requests.size());
-////                requestService.deleteRequests(requests);
-////            }
-////            System.out.println("2freelancer: "+freelancer);
-////            System.out.println("2Freelancer has assignments: " + freelancer.getAssignments());
-////            System.out.println("2Freelancer has requests: " + freelancer.getRequests());
-////            freelancerRepository.save(freelancer);
-////            freelancerRepository.delete(freelancer);
-////            System.out.println("Freelancer deleted successfully.");
-////        }
-//        //freelancerRepository.save(freelancer);
-//        freelancerRepository.delete(freelancer);
-//    }
-//    @Transactional
-//    public void deleteFreelancer(Integer freelancerId) {
-//        Freelancer freelancer = freelancerRepository.findById(freelancerId)
-//                .orElseThrow(() -> new RuntimeException("Freelancer not found"));
-//
-//        List<Assignment> assignments = freelancer.getAssignments();
-//        List<Request> requests = freelancer.getRequests();
-//
-//        // Αποσύνδεση από τα assignments
-//        if (assignments != null && !assignments.isEmpty()) {
-//            freelancer.getAssignments().removeAll(assignments);
-//            freelancerRepository.save(freelancer);
-//        }
-//
-//        // Αποσύνδεση από τα requests
-//        if (requests != null && !requests.isEmpty()) {
-//            freelancer.getRequests().removeAll(requests);
-//            freelancerRepository.save(freelancer);
-//        }
-//        // Διαγραφή του freelancer
-//        freelancerRepository.delete(freelancer);
-//        System.out.println("Freelancer deleted successfully.");
-//    }
     @Transactional
     public void deleteFreelancer(Integer freelancerId) {
         Freelancer freelancer = freelancerRepository.findById(freelancerId)
