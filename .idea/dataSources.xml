@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="dsdb_vue0@cuoudv0gph6c73dqgdug-a.frankfurt-postgres.render.com" uuid="2daa53ef-ea75-4538-bd42-0bc069603c9d">
+    <data-source source="LOCAL" name="dsdb_vue0@cuoudv0gph6c73dqgdug-a.frankfurt-postgres.render.com" uuid="abe06b9e-ebe4-4e7e-ae2a-6dd6a2c0e523">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
