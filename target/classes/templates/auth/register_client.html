@@ -37,7 +37,7 @@
             <label for="username">Username</label>
             <input type="text" class="form-control" th:field="*{username}" id="username"/>
             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></span>
-            <span th:if="${msg}" class="error text-danger" th:text="${msg}"></span>
+            <span th:if="${msg}" class="text-white" th:text="${msg}"></span>
         </div>
         <div class="form-group row">
             <label for="email">Email</label>

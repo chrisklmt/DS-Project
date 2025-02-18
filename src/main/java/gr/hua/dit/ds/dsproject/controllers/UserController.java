@@ -97,14 +97,18 @@ public class UserController {
             userBindingResult.rejectValue("username", "error.user", "Username is already in use. Please choose another one.");
             return "auth/register_freelancer";
         }
-            user.setFreelancer(freelancer);
-            freelancer.setUser(user);
+        if (userService.findByEmail(user.getEmail()).isPresent()) {
+            userBindingResult.rejectValue("email", "error.user", "Email is already in use. Please use another one.");
+            return "auth/register_freelancer";
+        }
+        user.setFreelancer(freelancer);
+        freelancer.setUser(user);
 
-            Integer id = userService.saveUser(user, "ROLE_FREELANCER");
-            freelancerService.saveFreelancer(freelancer);
+        Integer id = userService.saveUser(user, "ROLE_FREELANCER");
+        freelancerService.saveFreelancer(freelancer);
 
-            String message = "User '" + id + "' saved successfully !";
-            model.addAttribute("msg", message);
-            return "index";
+        String message = "User '" + id + "' saved successfully !";
+        model.addAttribute("msg", message);
+        return "index";
     }
 }

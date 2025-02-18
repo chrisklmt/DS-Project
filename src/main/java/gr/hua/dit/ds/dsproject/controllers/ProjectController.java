@@ -154,14 +154,14 @@ public class  ProjectController {
         model.addAttribute("acceptedProjects", projectService.getAcceptedProjects());
         return "project/projects";
     }
-    @Secured({"ROLE_CLIENT", "ROLE_ADMIN"})
+    @Secured("ROLE_CLIENT")
     @GetMapping("/unassignedANDoutdated")
     public String showUnassignedAndOutdatedProjects(Model model) {
         Client currentClient = clientService.getCurrentClient();
         model.addAttribute("projectsUnassignedAndOutdated", projectService.getUnassignedAndOutdatedProjects(currentClient));
         return "project/unassignedANDoutdated";
     }
-    @Secured("ROLE_CLIENT")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/projectOutdated")
     public String showProjectsOutdated(Model model) {
         model.addAttribute("projects", projectService.getAllOutdatedProjects());
