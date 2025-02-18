@@ -1,13 +1,10 @@
 package gr.hua.dit.ds.dsproject.services;
 
-
-import gr.hua.dit.ds.dsproject.entities.Assignment;
 import gr.hua.dit.ds.dsproject.entities.Project;
 import gr.hua.dit.ds.dsproject.entities.Request;
 import gr.hua.dit.ds.dsproject.entities.Status;
 import gr.hua.dit.ds.dsproject.repositories.RequestRepository;
 import jakarta.transaction.Transactional;
-import org.antlr.v4.runtime.atn.LexerIndexedCustomAction;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -64,13 +61,5 @@ public class RequestService {
             }
         }
         return requestsForProject;
-    }
-
-    @Transactional
-    public void deleteRequests(List<Request> requests) {
-        for (Request request : requests) {
-            requestRepository.deleteById(request.getId()); // Force individual deletion
-            System.out.println("Deleted request with ID: " + request.getId());
-        }
     }
 }

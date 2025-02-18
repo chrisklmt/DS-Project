@@ -3,12 +3,10 @@ package gr.hua.dit.ds.dsproject.controllers;
 import gr.hua.dit.ds.dsproject.entities.Client;
 import gr.hua.dit.ds.dsproject.entities.Freelancer;
 import gr.hua.dit.ds.dsproject.entities.User;
-import gr.hua.dit.ds.dsproject.repositories.RoleRepository;
 import gr.hua.dit.ds.dsproject.services.ClientService;
 import gr.hua.dit.ds.dsproject.services.FreelancerService;
 import gr.hua.dit.ds.dsproject.services.UserService;
 import jakarta.validation.Valid;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,11 +20,8 @@ public class UserController {
     private final FreelancerService freelancerService;
     private UserService userService;
 
-    private RoleRepository roleRepository;
-
-    public UserController(UserService userService, RoleRepository roleRepository, ClientService clientService, FreelancerService freelancerService) {
+    public UserController(UserService userService, ClientService clientService, FreelancerService freelancerService) {
         this.userService = userService;
-        this.roleRepository = roleRepository;
         this.clientService = clientService;
         this.freelancerService = freelancerService;
     }
@@ -50,20 +45,17 @@ public class UserController {
             return "auth/register_client";
         }
 
-        // Check if the username already exists
         if (userService.findByUsername(user.getUsername()).isPresent()) {
             String message = "Username is already in use. Please choose another one.";
             model.addAttribute("msg", message);
             return "auth/register_client";
         }
 
-        // Check if email already exists
         if (userService.findByEmail(user.getEmail()).isPresent()) {
             userBindingResult.rejectValue("email", "error.user", "Email is already in use. Please use another one.");
             return "auth/register_client";
         }
 
-        // Proceed with user and client registration
         user.setClient(client);
         client.setUser(user);
 

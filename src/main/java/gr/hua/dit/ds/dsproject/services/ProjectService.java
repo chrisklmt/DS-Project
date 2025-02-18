@@ -6,8 +6,6 @@ import gr.hua.dit.ds.dsproject.repositories.AssignmentRepository;
 import gr.hua.dit.ds.dsproject.repositories.ProjectRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,13 +15,9 @@ import java.util.List;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final AssignmentService assignmentService;
-    private final AssignmentRepository assignmentRepository;
 
-    public ProjectService(ProjectRepository projectRepository, AssignmentService assignmentService, AssignmentRepository assignmentRepository) {
+    public ProjectService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
-        this.assignmentService = assignmentService;
-        this.assignmentRepository = assignmentRepository;
     }
 
     @Transactional
@@ -147,18 +141,6 @@ public class ProjectService {
     }
 
     @Transactional
-    public boolean checkIfProjectExists(Project project) {
-        List<Project> projects = projectRepository.findAll();
-        for (Project p : projects) {
-            if (p.getTitle().equals(projects.get(0).getTitle())) {
-                System.out.println("Project " + p.getTitle() + " already exists ");
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Transactional
     public void deleteProject(Integer projectId) {
         List<Project> projects = projectRepository.findAll();
         for(Project p : projects){
@@ -211,7 +193,6 @@ public class ProjectService {
         List<Project> projects = projectRepository.findAll();
         List<Project> completedProjects = new ArrayList<>();
         LocalDate today = LocalDate.now();
-
 
         for (Project project : projects) {
             if (project.getAssignment() != null && project.getClient() == client &&

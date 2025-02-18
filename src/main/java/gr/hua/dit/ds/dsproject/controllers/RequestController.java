@@ -1,7 +1,5 @@
 package gr.hua.dit.ds.dsproject.controllers;
 
-
-import gr.hua.dit.ds.dsproject.entities.Project;
 import gr.hua.dit.ds.dsproject.entities.Request;
 import gr.hua.dit.ds.dsproject.services.RequestService;
 import jakarta.validation.Valid;
@@ -39,14 +37,11 @@ public class RequestController {
         return "request/rejectedRequests";
     }
 
-
-
-
     @GetMapping("/new")
     public String addRequest(Model model){
         Request request = new Request();
         model.addAttribute("request", request);
-        return "request/requests";/////////////////////s
+        return "request/requests";
     }
 
     @PostMapping("/new")
@@ -54,7 +49,7 @@ public class RequestController {
                               BindingResult theBindingResult, Model model ){
         if (theBindingResult.hasErrors()) {
             System.out.println("error");
-            return "request/requests";///////////////s
+            return "request/requests";
         } else {
             requestService.saveRequest(request);
             model.addAttribute("requests", requestService.getRequests());

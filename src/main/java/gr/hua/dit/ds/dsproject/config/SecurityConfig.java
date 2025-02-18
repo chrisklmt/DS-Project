@@ -16,16 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    private UserService userService;
-
-    private UserDetailsService userDetailsService;
-
-    private BCryptPasswordEncoder passwordEncoder;
-
-    public SecurityConfig(UserService userService, UserDetailsService userDetailsService, BCryptPasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
+    public SecurityConfig() {
     }
 
     @Bean
@@ -33,7 +24,6 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home", "/auth/**", "/images/**", "/js/**", "/css/**").permitAll()
-                        .requestMatchers("/teacher/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

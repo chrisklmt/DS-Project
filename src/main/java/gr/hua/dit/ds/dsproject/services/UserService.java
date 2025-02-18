@@ -50,12 +50,6 @@ public class UserService implements UserDetailsService {
         return user.getId();
     }
 
-
-    @Transactional
-    public Integer updateUser(User user) {
-        user = userRepository.save(user);
-        return user.getId();
-    }
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -74,26 +68,6 @@ public class UserService implements UserDetailsService {
                             .collect(Collectors.toSet())
             );
         }
-    }
-
-    @Transactional
-    public Object getUsers() {
-        return userRepository.findAll();
-    }
-
-    public Object getUser(Integer userId) {
-        return userRepository.findById(userId).get();
-    }
-
-    @Transactional
-    public void updateOrInsertRole(Role role) {
-        roleRepository.updateOrInsert(role);
-    }
-
-
-    @Transactional
-    public boolean existsByUsername(String username) {
-        return userRepository.existsByUsername(username);
     }
 
     @Transactional

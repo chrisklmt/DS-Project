@@ -1,7 +1,6 @@
 package gr.hua.dit.ds.dsproject.services;
 
 import gr.hua.dit.ds.dsproject.entities.Client;
-import gr.hua.dit.ds.dsproject.entities.Freelancer;
 import gr.hua.dit.ds.dsproject.entities.User;
 import gr.hua.dit.ds.dsproject.repositories.ClientRepository;
 import gr.hua.dit.ds.dsproject.repositories.UserRepository;
@@ -39,11 +38,6 @@ public class ClientService {
         existingClient.setFirstName(client.getFirstName());
         existingClient.setLastName(client.getLastName());
         existingClient.setPhone(client.getPhone());
-    }
-
-    @Transactional
-    public Client getClient(Integer clientId) {
-        return clientRepository.findById(clientId).get();
     }
 
     @Transactional

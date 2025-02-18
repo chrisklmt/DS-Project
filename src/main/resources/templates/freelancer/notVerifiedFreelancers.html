@@ -6,13 +6,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Freelancer</title>
+    <title>Unverified Freelancers</title>
 </head>
 <body>
 
 <div layout:fragment="main-content">
     <div th:if="${ not#lists.isEmpty(freelancers)}">
-        <h3>Not Verified Freelancers</h3>
+        <h3>Unverified Freelancers</h3><br>
         <table class="table">
             <thead>
             <tr>

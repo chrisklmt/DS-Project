@@ -1,10 +1,8 @@
 package gr.hua.dit.ds.dsproject.controllers;
 
 import gr.hua.dit.ds.dsproject.entities.Project;
-import gr.hua.dit.ds.dsproject.entities.Assignment;
 import gr.hua.dit.ds.dsproject.entities.Client;
 import gr.hua.dit.ds.dsproject.entities.Request;
-import gr.hua.dit.ds.dsproject.services.AssignmentService;
 import gr.hua.dit.ds.dsproject.services.ClientService;
 import gr.hua.dit.ds.dsproject.services.ProjectService;
 import gr.hua.dit.ds.dsproject.services.RequestService;
@@ -21,13 +19,11 @@ import java.util.List;
 @RequestMapping("/client")
 public class ClientController {
     private final ClientService clientService;
-    private final AssignmentService assignmentService;
     private final ProjectService projectService;
     private final RequestService requestService;
 
-    public ClientController(ClientService clientService, AssignmentService assignmentService, ProjectService projectService, RequestService requestService) {
+    public ClientController(ClientService clientService, ProjectService projectService, RequestService requestService) {
         this.clientService = clientService;
-        this.assignmentService = assignmentService;
         this.projectService = projectService;
         this.requestService = requestService;
     }

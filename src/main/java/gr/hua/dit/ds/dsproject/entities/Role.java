@@ -1,7 +1,6 @@
 package gr.hua.dit.ds.dsproject.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "roles")
@@ -11,7 +10,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-//    @NotEmpty(message = "Name is required")
     @Column(length = 20)
     private String name;
 

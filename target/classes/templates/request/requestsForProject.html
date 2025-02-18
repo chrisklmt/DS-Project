@@ -11,7 +11,7 @@
 <body>
 <div layout:fragment="main-content">
     <div th:if="${ not#lists.isEmpty(requestsForProject)}">
-        <h3>Freelancer's Requests for <span th:text="${currentProject.title}"></span></h3>
+        <h3>Freelancer's Requests for <span th:text="${currentProject.title}"></span></h3><br>
         <table class="table">
             <thead>
             <tr>

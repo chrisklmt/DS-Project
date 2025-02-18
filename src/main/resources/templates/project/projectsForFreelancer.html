@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{page_layout/layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+      layout:decorate="~{page_layout/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 <body>
 <div layout:fragment="main-content">
     <div th:if="${ not#lists.isEmpty(notRequestedProjects)}">
-        <h3>All Projects</h3>
+        <h3>All Projects</h3><br>
         <p th:if="${!freelancerVerified}">You need to be verified by admin to make Requests</p>
         <table class="table">
             <thead>
@@ -21,6 +21,7 @@
                 <th>Payment Amount</th>
                 <th>Status</th>
                 <th>Deadline</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>

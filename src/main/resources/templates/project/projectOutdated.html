@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{page_layout/layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+      layout:decorate="~{page_layout/layout}">
 
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 <body>
 <div layout:fragment="main-content">
   <div th:if="${ not#lists.isEmpty(projects)}">
-    <h3>All Outdated Projects</h3>
+    <h3>All Outdated Projects</h3><br>
     <table class="table">
       <thead>
       <tr>

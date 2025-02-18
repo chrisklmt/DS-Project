@@ -16,18 +16,14 @@ public class FreelancerService {
     private final UserRepository userRepository;
     private final AssignmentRepository assignmentRepository;
     private final RequestRepository requestRepository;
-    private final AssignmentService assignmentService;
-    private final RequestService requestService;
     private final ProjectRepository projectRepository;
 
     public FreelancerService(FreelancerRepository freelancerRepository, UserRepository userRepository,
-                             AssignmentRepository assignmentRepository, AssignmentService assignmentService,
-                             RequestService requestService, RequestRepository requestRepository, ProjectRepository projectRepository) {
+                             AssignmentRepository assignmentRepository, RequestRepository requestRepository,
+                             ProjectRepository projectRepository) {
         this.freelancerRepository = freelancerRepository;
         this.userRepository = userRepository;
         this.assignmentRepository = assignmentRepository;
-        this.assignmentService = assignmentService;
-        this.requestService = requestService;
         this.requestRepository = requestRepository;
         this.projectRepository = projectRepository;
     }
@@ -82,11 +78,6 @@ public class FreelancerService {
         }
         return freelancer;
     }
-    @Transactional
-    public void verifyFreelancer(Integer freelancerId) {
-        Freelancer freelancer = getFreelancer(freelancerId);
-        freelancer.setVerified(true);
-    }
 
     @Transactional
     public void deleteFreelancer(Integer freelancerId) {
@@ -97,7 +88,6 @@ public class FreelancerService {
         List<Request> requests = freelancer.getRequests();
 
         // Αποσύνδεση από τα requests
-        System.out.println(requests);
         if (requests != null && !requests.isEmpty()) {
             for (Request request : requests) {
                 request.setFreelancer(null);  // Αποσύνδεση του freelancer από το request
@@ -120,7 +110,6 @@ public class FreelancerService {
             // Διαγραφή των assignments
             assignmentRepository.deleteAll(assignments);
         }
-
         // Διαγραφή του freelancer
         freelancerRepository.delete(freelancer);
 
@@ -130,10 +119,5 @@ public class FreelancerService {
                 assignmentRepository.delete(assignment);
             }
         }
-
-        System.out.println("Freelancer deleted successfully.");
     }
-
-
-
 }

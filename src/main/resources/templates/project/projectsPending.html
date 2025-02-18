@@ -6,12 +6,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Projects</title>
+    <title>Pending Projects</title>
 </head>
 <body>
 <div layout:fragment="main-content">
     <div th:if="${ not#lists.isEmpty(projects)}">
-        <h3>All Pending Projects</h3>
+        <h3>All Pending Projects</h3><br>
         <table class="table">
             <thead>
             <tr>
@@ -20,6 +20,7 @@
                 <th>Payment Amount</th>
                 <th>Status</th>
                 <th>Deadline</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -30,21 +31,24 @@
                 <td th:text="${project.projectStatus}"></td>
                 <td th:text="${project.deadline}"></td>
                 <td>
-                    <form th:action="@{'/project/accept-project/' + ${project.id}}" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <button type="submit" class="btn btn-success">Accept Project</button>
-                    </form>
+                    <div style="display: flex; gap: 10px;">
+                        <form th:action="@{'/project/accept-project/' + ${project.id}}"
+                              method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <button type="submit" class="btn btn-success">Accept Project</button>
+                        </form>
+                        <form th:action="@{'/project/reject-project/' + ${project.id}}"
+                              method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <button type="submit" class="btn btn-danger">Reject Project</button>
+                        </form>
+                    </div>
                 </td>
-                <td>
-                    <form th:action="@{'/project/reject-project/' + ${project.id}}" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <button type="submit" class="btn btn-danger">Reject Project</button>
-                    </form>
-                </td>
+
             </tr>
             </tbody>
         </table>
     </div>
     <div th:if="${ #lists.isEmpty(projects)}">
-        <h3>No Pending Projects found!!</h3>
+        <h3>No Pending Projects found!</h3>
     </div>
 </div>
 </body>
