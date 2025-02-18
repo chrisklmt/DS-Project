@@ -13,22 +13,25 @@ by verifying users and managing assignments.
 - Authentication & Authorization
 - User login & registration (Client, Freelancer, Admin)
 - Role-based access control with Spring Security
-
-### Project Management
-- Clients can create, edit, and manage projects
-- Freelancers can browse and apply for projects
-- Admins approve project listings and assignments
-
-### Freelancer Management
-- Freelancers submit applications for projects
-- Clients review applications and assign freelancers
-- Admins verify freelancer profiles
-
-### Admin Capabilities
-- Review & approve projects
-- Manage disputes between clients and freelancers
-- Remove invalid projects and requests
-
+- **Clients** can:
+    - Publish new projects
+    - View their active projects
+    - Review freelancer applications for their projects
+    - View outdated projects and delete them
+    - Hire freelancers
+    - Manage their profile (view and update personal details)
+- **Freelancers** can:
+    - Browse available projects
+    - Submit applications for one or more projects
+    - View their applications and check their status (Approved, Rejected, Under Review)
+    - Manage their profile (view and update personal details)
+- **Admins** can:
+    - Confirm new project submissions from clients
+    - Delete rejected or invalid projects 
+    - Verify freelancer profiles
+    - Delete freelancer profiles if necessary
+    - Manage project publication requests
+    - View project assignments (engagements)
 ---
 
 ### Tech Stack

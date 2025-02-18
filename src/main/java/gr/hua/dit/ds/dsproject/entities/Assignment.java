@@ -52,4 +52,12 @@ public class Assignment {
                 ", dateSubmitted=" + dateSubmitted +
                 '}';
     }
+    public String getStatus() {
+        // Ελέγχει αν η τρέχουσα ημερομηνία είναι πριν από το deadline του project
+        if (LocalDate.now().isBefore(this.getProject().getDeadline())) {
+            return "Under Construction";
+        } else {
+            return "Completed";
+        }
+    }
 }

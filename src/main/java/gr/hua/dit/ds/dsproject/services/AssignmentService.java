@@ -51,5 +51,4 @@ public class AssignmentService {
             System.out.println("Deleted assignment with ID: " + assignment.getId());
         }
     }
-
 }

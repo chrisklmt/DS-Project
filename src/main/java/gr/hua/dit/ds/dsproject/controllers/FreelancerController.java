@@ -5,6 +5,7 @@ import gr.hua.dit.ds.dsproject.entities.Project;
 import gr.hua.dit.ds.dsproject.services.FreelancerService;
 import gr.hua.dit.ds.dsproject.services.ProjectService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,18 +24,21 @@ public class FreelancerController {
         this.projectService = projectService;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showFreelancers(Model model){
         model.addAttribute("freelancers", freelancerService.getFreelancers());
         return "freelancer/freelancers";
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/not-verified")
     public String showNotVerifiedFreelancers(Model model){
         model.addAttribute("freelancers", freelancerService.getNotVerifiedFreelancer());
         return "freelancer/notVerifiedFreelancers";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/verify/{freelancer_id}")
     public String changeVerifiedStatus(@PathVariable int freelancer_id,Model model){
         Freelancer freelancer = freelancerService.getFreelancer(freelancer_id);
@@ -44,6 +48,7 @@ public class FreelancerController {
         return "freelancer/notVerifiedFreelancers";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/delete/{freelancer_id}")
     public String deleteFreelancer(@PathVariable int freelancer_id,Model model){
 
@@ -72,6 +77,7 @@ public class FreelancerController {
         }
     }
 
+    @Secured("ROLE_FREELANCER")
     @GetMapping("/projects")
     public String showProjects(Model model) {
         Freelancer freelancer = freelancerService.getCurrentFreelancer();
@@ -85,6 +91,7 @@ public class FreelancerController {
         return "project/projectsForFreelancer";
     }
 
+    @Secured("ROLE_FREELANCER")
     @GetMapping("/requests")
     public String showRequests(Model model) {
         Freelancer freelancer = freelancerService.getCurrentFreelancer();

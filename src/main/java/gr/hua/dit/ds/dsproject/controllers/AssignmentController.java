@@ -4,6 +4,7 @@ package gr.hua.dit.ds.dsproject.controllers;
 import gr.hua.dit.ds.dsproject.entities.*;
 import gr.hua.dit.ds.dsproject.services.*;
 import jakarta.validation.Valid;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ public class AssignmentController {
         this.clientService = clientService;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showAssignments(Model model){
         model.addAttribute("assignments", assignmentService.getAssignments());

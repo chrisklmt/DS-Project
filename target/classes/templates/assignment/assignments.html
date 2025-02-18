@@ -19,6 +19,8 @@
                 <th>Project Title</th>
                 <th>Client</th>
                 <th>Date submitted</th>
+                <th>Deadline</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
@@ -27,6 +29,8 @@
                 <td th:text="${assignment.project.title}"></td>
                 <td th:text="${assignment.project.client.firstName} +' '+ ${assignment.project.client.lastName}"></td>
                 <td th:text="${assignment.dateSubmitted}"></td>
+                <td th:text="${assignment.project.getDeadline()}"></td>
+                <td th:text="${assignment.getStatus()}"></td>
             </tr>
             </tbody>
         </table>
