@@ -52,6 +52,9 @@
                     <a class="nav-link" href="/freelancer/requests">My Requests</a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_FREELANCER')">
+                    <a class="nav-link" href="/freelancer/my-assignments">My Assignments</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_FREELANCER')">
                     <a class="nav-link" href="/freelancer/my-profile">My Profile</a>
                 </li>
                     <!-- Links for unauthenticated users -->

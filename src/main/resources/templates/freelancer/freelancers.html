@@ -13,7 +13,7 @@
 <div layout:fragment="main-content">
     <div th:if="${ not#lists.isEmpty(freelancers)}">
         <h3>All Freelancers</h3>
-        <a href="/freelancer/not-verified" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">Show Not Verified Freelancers</a>
+        <a href="/freelancer/not-verified" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">Show Not Verified Freelancers</a><br><br>
         <table class="table">
             <thead>
             <tr>

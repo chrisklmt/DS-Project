@@ -9,6 +9,7 @@ import gr.hua.dit.ds.dsproject.services.ClientService;
 import gr.hua.dit.ds.dsproject.services.ProjectService;
 import gr.hua.dit.ds.dsproject.services.RequestService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class ClientController {
         this.requestService = requestService;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showClients(Model model){
         model.addAttribute("clients", clientService.getClients());
@@ -72,6 +74,7 @@ public class ClientController {
         model.addAttribute("requestsForProject", requestsForProject);
         return "request/requestsForProject";
     }
+    @Secured("ROLE_CLIENT")
     @GetMapping("/my-profile")
     public String showProfile(Model model) {
         Client client = clientService.getCurrentClient();

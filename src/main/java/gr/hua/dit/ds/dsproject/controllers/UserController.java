@@ -8,6 +8,7 @@ import gr.hua.dit.ds.dsproject.services.ClientService;
 import gr.hua.dit.ds.dsproject.services.FreelancerService;
 import gr.hua.dit.ds.dsproject.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,17 +48,32 @@ public class UserController {
         if (userBindingResult.hasErrors() || clientBindingResult.hasErrors()) {
             System.out.println("Error");
             return "auth/register_client";
-        }else{// Ελεγχος για να μην υπαρχει το ιδιο ονομα Username και Mail     Client client = clientService.getCurrentClient();
-            user.setClient(client);
-            client.setUser(user);
-
-            Integer id = userService.saveUser(user, "ROLE_CLIENT");
-            clientService.saveClient(client);
-
-            String message = "User '" + id + "' saved successfully !";
-            model.addAttribute("msg", message);
-            return "index";
         }
+
+        // Check if the username already exists
+        if (userService.findByUsername(user.getUsername()).isPresent()) {
+            String message = "Username is already in use. Please choose another one.";
+            model.addAttribute("msg", message);
+            return "auth/register_client";
+        }
+
+        // Check if email already exists
+        if (userService.findByEmail(user.getEmail()).isPresent()) {
+            userBindingResult.rejectValue("email", "error.user", "Email is already in use. Please use another one.");
+            return "auth/register_client";
+        }
+
+        // Proceed with user and client registration
+        user.setClient(client);
+        client.setUser(user);
+
+        Integer id = userService.saveUser(user, "ROLE_CLIENT");
+        clientService.saveClient(client);
+
+        String message = "User '" + id + "' saved successfully!";
+        model.addAttribute("msg", message);
+
+        return "index";
     }
 
     @GetMapping("/registerFreelancer")
@@ -77,7 +93,10 @@ public class UserController {
         if (userBindingResult.hasErrors() || freelancerBindingResult.hasErrors()) {
             System.out.println("Error");
             return "auth/register_freelancer";
-        } else {
+        } if (userService.findByUsername(user.getUsername()).isPresent()) {
+            userBindingResult.rejectValue("username", "error.user", "Username is already in use. Please choose another one.");
+            return "auth/register_freelancer";
+        }
             user.setFreelancer(freelancer);
             freelancer.setUser(user);
 
@@ -87,6 +106,5 @@ public class UserController {
             String message = "User '" + id + "' saved successfully !";
             model.addAttribute("msg", message);
             return "index";
-        }
     }
 }
